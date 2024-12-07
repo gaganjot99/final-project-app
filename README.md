@@ -10,7 +10,7 @@ sudo python3 app.py
 ### Building mysql docker image 
 ```docker build -t my_db -f Dockerfile_mysql . ```
 
-### Building application docker image 
+### Building application docker image temp
 ```docker build -t my_app -f Dockerfile . ```
 
 ### Running mysql
