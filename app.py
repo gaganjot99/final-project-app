@@ -15,6 +15,7 @@ DBPWD = os.environ.get("DBPWD") or "passwors"
 DATABASE = os.environ.get("DATABASE") or "employees"
 COLOR_FROM_ENV = os.environ.get('APP_COLOR') or "lime"
 DBPORT = int(os.environ.get("DBPORT"))
+GROUP_NAME = os.environ.get('GROUP_NAME') or "GROUP10"
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -44,7 +45,7 @@ app = Flask(__name__, static_folder='downloads')
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', url="downloads/bg.jpg")
+    return render_template('addemp.html', url="downloads/bg.jpg", group=GROUP_NAME)
 
 @app.route("/about", methods=['GET','POST'])
 def about():
