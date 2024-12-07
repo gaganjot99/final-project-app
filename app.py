@@ -3,7 +3,9 @@ from pymysql import connections
 import os
 import random
 import argparse
-
+import boto3
+from botocore.exceptions import NoCredentialsError, PartialCredentialsError
+import logging
 
 app = Flask(__name__)
 
@@ -26,7 +28,16 @@ db_conn = connections.Connection(
 output = {}
 table = 'employee';
 
+def download_file(file_name, bucket):
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3')
+    output = f"downloads/bg.jpg"
+    s3.Bucket(bucket).download_file(file_name, output)
 
+    return output
+    
 # Create a string of supported colors
 app = Flask(__name__, static_folder='downloads')
 
@@ -97,7 +108,7 @@ def FetchData():
                            lname=output["last_name"], interest=output["primary_skills"], location=output["location"], url="downloads/bg.jpg")
 
 if __name__ == '__main__':
-    
+    download_file(os.environ.get('IMAGE_NAME'), "imagestemps")
     # Check for Command Line Parameters for color
     parser = argparse.ArgumentParser()
     parser.add_argument('--color', required=False)
