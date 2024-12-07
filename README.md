@@ -17,7 +17,7 @@ sudo python3 app.py
 ```docker run -d -e MYSQL_ROOT_PASSWORD=pw  my_db```
 
 
-### Get the IP of the database and export it as DBHOST variable
+### Get the IP of the database and export it as DBHOST variable temp
 ```docker inspect <container_id>```
 
 
